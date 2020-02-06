@@ -5,7 +5,8 @@ data "aws_availability_zones" "available" {
 }
 
 output "AZS" {
-  value = data.aws_availability_zones.available.id
+  value = data
+//  value = data.aws_availability_zones.available.names
 }
 
 // To fetch the list of VPC's
