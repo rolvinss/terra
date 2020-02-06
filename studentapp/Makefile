@@ -3,15 +3,7 @@
 .SHELL := /usr/bin/bash
 .PHONY: dev-apply dev-destroy prod-apply prod-destroy
 VARS="variables/$(ENV)-$(REGION).tfvars"
-CURRENT_FOLDER=$(shell basename "$$(pwd)")
-S3_BUCKET="$(ENV)-$(REGION)-yourCompany-terraform"
-DYNAMODB_TABLE="$(ENV)-$(REGION)-yourCompany-terraform"
-WORKSPACE="$(ENV)-$(REGION)"
-BOLD=$(shell tput bold)
-RED=$(shell tput setaf 1)
-GREEN=$(shell tput setaf 2)
-YELLOW=$(shell tput setaf 3)
-RESET=$(shell tput sgr0)
+
 
 
 help:
