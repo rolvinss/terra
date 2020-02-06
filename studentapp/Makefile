@@ -13,22 +13,31 @@ GREEN=$(shell tput setaf 2)
 YELLOW=$(shell tput setaf 3)
 RESET=$(shell tput sgr0)
 
+
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+dev-init:
+	@cd ENV/DEV
+	@terraform init
 
-dev-apply: ## build up things for the dev environemnt
+prod-init:
+	@cd ENV/PROD
+	@terraform init
+
+
+dev-apply: dev-init ## build up things for the dev environemnt
 	@cd ENV/DEV
 	@terraform apply -auto-approve
 
-dev-destroy: ## Destroy things for the dev environment
+dev-destroy: dev-init ## Destroy things for the dev environment
 	@cd ENV/DEV
 	@terraform destroy -auto-approve
 
-prod-apply: ## build up things for the dev environemnt
+prod-apply: prod-init## build up things for the dev environemnt
 	@cd ENV/PROD
 	@terraform apply -auto-approve
 
-prod-destroy: ## Destroy things for the dev environment
+prod-destroy: prod-init ## Destroy things for the dev environment
 	@cd ENV/PROD
 	@terraform destroy -auto-approve
