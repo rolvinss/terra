@@ -1,7 +1,7 @@
 
 .ONESHELL:
 .SHELL := /usr/bin/bash
-.PHONY: dev-apply dev-destroy
+.PHONY: dev-apply dev-destroy prod-apply prod-destroy
 VARS="variables/$(ENV)-$(REGION).tfvars"
 CURRENT_FOLDER=$(shell basename "$$(pwd)")
 S3_BUCKET="$(ENV)-$(REGION)-yourCompany-terraform"
@@ -22,4 +22,13 @@ dev-apply: ## build up things for the dev environemnt
 	@terraform apply -auto-approve
 
 dev-destroy: ## Destroy things for the dev environment
+	@cd ENV/DEV
+	@terraform destroy -auto-approve
+
+prod-apply: ## build up things for the dev environemnt
+	@cd ENV/PROD
+	@terraform apply -auto-approve
+
+prod-destroy: ## Destroy things for the dev environment
+	@cd ENV/PROD
 	@terraform destroy -auto-approve
