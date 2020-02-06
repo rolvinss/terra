@@ -11,6 +11,7 @@ help:
 
 dev-init:
 	@cd ENV/DEV
+	@git pull
 	@terraform init
 
 prod-init:
